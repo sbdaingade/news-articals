@@ -14,28 +14,33 @@ struct NewArticleView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                
-                
-                
+                ScrollView(.vertical, showsIndicators: false) {
+                    VStack(spacing: 10) {
+                        FeatureTabView()
+                            .padding(.vertical, 0)
+                            .frame(minHeight: 280)
+                        SubTitleView(title: "News Articles")
+                    }
+                }
+                .toolbar {
+                    HStack {
+                        DatePicker(
+                            "Start Date",
+                            selection: $date,
+                            displayedComponents: [.date]
+                        )
+                    }
+                    
+                    Button("Setting") {
+                        print("Setting tapped!")
+                    }
+                    
+                    Button("Help") {
+                        print("Help tapped!")
+                    }
+                }
             }
-            .toolbar {
-                HStack {
-                    DatePicker(
-                        "Start Date",
-                        selection: $date,
-                        displayedComponents: [.date]
-                    )
-                }
-                
-                Button("Setting") {
-                    print("Setting tapped!")
-                }
-                
-                Button("Help") {
-                    print("Help tapped!")
-                }
-            }
-            .navigationTitle("New Articles")
+            .navigationTitle("News")
         }
     }
 }
