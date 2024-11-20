@@ -20,7 +20,7 @@ struct ArticleDetailView: View {
     var body: some View {
         NavigationStack {
             ZStack {
-                VStack(alignment: .leading, spacing: 5) {
+                VStack(alignment: .center, spacing: 5) {
                     TitleView(title: "Sachin Daingade")
                     
                     NewImageView(image: "18-Sachin")
@@ -46,11 +46,7 @@ struct ArticleDetailView: View {
                             .font(.system(.body, design: .rounded))
                             
                         }// :SCROLLVIEW
-                        Spacer()
-                        Button("Add Bookmark") {
-                            
-                        }.frame( height: 50, alignment: .leading)
-                        
+                       Spacer()
                     }
                     .padding(.horizontal)
                     .background(
@@ -60,6 +56,13 @@ struct ArticleDetailView: View {
                             .zIndex(0)
                     )
                     .ignoresSafeArea(.all,edges: .all)
+                    
+                    VStack(alignment: .center, spacing: 5) {
+                        Button("Add Bookmark") {
+                        }
+                        .font(.title3)
+                    }.cornerRadius(50)
+                 
                 }
             }
             .background(

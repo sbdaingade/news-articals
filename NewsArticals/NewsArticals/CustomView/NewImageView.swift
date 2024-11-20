@@ -19,6 +19,7 @@ struct NewImageView: View {
                 .scaledToFit()
                 .offset(y: isAnimated ? 0 : -35)
                 .cornerRadius(20)
+                .padding([.leading, .trailing],10)
         } //:HStack
         .onAppear {
             withAnimation(.easeOut(duration: 0.56)) {
