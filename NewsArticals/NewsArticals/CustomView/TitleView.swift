@@ -1,5 +1,5 @@
 //
-//  SubTitleView.swift
+//  TitleView.swift
 //  NewsArticals
 //
 //  Created by Sachin Daingade on 20/11/24.
@@ -7,13 +7,13 @@
 
 import SwiftUI
 
-struct SubTitleView: View {
+struct TitleView: View {
     var title: String
     var body: some View {
         HStack {
             Text(title)
-                .font(.subheadline)
-                .fontWeight(.heavy)
+                .font(.title)
+                .fontWeight(.light)
             
             Spacer()
         }
@@ -24,8 +24,8 @@ struct SubTitleView: View {
     }
 }
 
-struct SubTitleView_Previews: PreviewProvider {
+struct TitleView_Previews: PreviewProvider {
     static var previews: some View {
-        SubTitleView(title: "News")
+        TitleView(title: "Main News")
     }
 }

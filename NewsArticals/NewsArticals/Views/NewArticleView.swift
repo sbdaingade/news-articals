@@ -20,6 +20,7 @@ struct NewArticleView: View {
                             .padding(.vertical, 0)
                             .frame(minHeight: 280)
                         SubTitleView(title: "News Articles")
+                        
                     }
                 }
                 .toolbar {
