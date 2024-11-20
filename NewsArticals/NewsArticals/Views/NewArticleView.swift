@@ -9,9 +9,34 @@ import SwiftUI
 
 struct NewArticleView: View {
     @Binding var tabselection: Int
+    @State private var date = Calendar.current.date(byAdding: .day, value: -3, to: Date())!
 
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        NavigationStack {
+            ZStack {
+                
+                
+                
+            }
+            .toolbar {
+                HStack {
+                    DatePicker(
+                        "Start Date",
+                        selection: $date,
+                        displayedComponents: [.date]
+                    )
+                }
+                
+                Button("Setting") {
+                    print("Setting tapped!")
+                }
+                
+                Button("Help") {
+                    print("Help tapped!")
+                }
+            }
+            .navigationTitle("New Articles")
+        }
     }
 }
 
