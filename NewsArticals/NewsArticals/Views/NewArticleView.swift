@@ -11,6 +11,7 @@ struct NewArticleView: View {
     @Binding var tabselection: Int
     @State private var date = Calendar.current.date(byAdding: .day, value: -3, to: Date())!
     @StateObject var viewModel = NewArticleViewModel()
+    @State var isPresented: Bool = false
 
     var body: some View {
         NavigationStack {
@@ -35,7 +36,7 @@ struct NewArticleView: View {
                         
                        
                     }
-                }
+                }//scrollview
                 .toolbar {
                     HStack {
                         DatePicker(
@@ -51,8 +52,25 @@ struct NewArticleView: View {
                     
                     Button("Help") {
                         print("Help tapped!")
+                        isPresented.toggle()
                     }
                 }
+                
+             
+                
+                if isPresented {
+                    CustomAlert(presentAlert: $isPresented, alertType: .error(title: "Error", message: "Please confirm that you're still open to session requests then you will find the call from new user."), isShowVerticalButtons: false){
+                        withAnimation{
+                            isPresented.toggle()
+                        }
+                    } rightButtonAction: {
+                        withAnimation{
+                            isPresented.toggle()
+                        }
+                    }
+                }
+                    
+                
             }
             .onAppear(perform: {
                 viewModel.input = .getAllProducts

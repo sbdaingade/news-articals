@@ -192,11 +192,7 @@ struct CustomAlert: View {
                 Color(.blue)
             )
             .cornerRadius(4)
-            
-        
         }
-        
-        
     }
 }
 #Preview {
