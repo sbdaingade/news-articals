@@ -9,9 +9,10 @@ import Alamofire
 import Foundation
 
 public enum SDRouter: URLRequestConvertible {
-    static let baseAPIVersion = ".npoint.io"
+    static let baseAPIVersion = "https://newsapi.org/v2/everything?q=tesla&from=2024-11-11&sortBy=publishedAt&apiKey=4a4a314c16c94996837a2b0c27ccd767"
     case groups(forSiteWithID: Int)
     case getPetsData
+    case getNewsArticles
     
     var method: HTTPMethod {
         switch self {
@@ -19,16 +20,19 @@ public enum SDRouter: URLRequestConvertible {
             return .get
         case .getPetsData:
             return .get
+        case .getNewsArticles:
+            return .get
         }
     }
     
     var path: String {
         switch self {
-        
         case .groups(let site_id):
                  return "/site/\(site_id)/groups/"
         case .getPetsData:
             return "/89bc67a9845e640ae6ce"
+        case .getNewsArticles:
+            return ""
         }
     }
     
@@ -41,7 +45,7 @@ public enum SDRouter: URLRequestConvertible {
     /// - returns: A URL request.
     
     public func asURLRequest() throws -> URLRequest  {
-        let url = Foundation.URL(string: "" + SDRouter.baseAPIVersion)!
+        let url = Foundation.URL(string: SDRouter.baseAPIVersion)!
         var urlRequest = URLRequest(url: url.appendingPathComponent(path))
         urlRequest.httpMethod = method.rawValue
         
@@ -50,6 +54,9 @@ public enum SDRouter: URLRequestConvertible {
             urlRequest = try URLEncoding.default.encode(urlRequest, with: nil)
         case .getPetsData:
             urlRequest = try URLEncoding.default.encode(urlRequest, with: nil)
+        case .getNewsArticles:
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: nil)
+
         }
         return urlRequest
     }

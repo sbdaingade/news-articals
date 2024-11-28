@@ -10,6 +10,7 @@ import SwiftUI
 struct NewArticleView: View {
     @Binding var tabselection: Int
     @State private var date = Calendar.current.date(byAdding: .day, value: -3, to: Date())!
+    @StateObject var viewModel = NewArticleViewModel()
 
     var body: some View {
         NavigationStack {
@@ -21,6 +22,18 @@ struct NewArticleView: View {
                             .frame(minHeight: 280)
                         SubTitleView(title: "News Articles")
                         
+//                        List(viewModel.arrOfProducts) { product in
+//                            ScrollView {
+//                                let viewModel = ArticleCellViewModel(withArticle: product)
+//                                NavigationLink {
+//                                    // ProductDetailView(product: product)
+//                                } label: {
+//                                    ArticleCell(viewModel: viewModel)
+//                                }
+//                            }
+//                        }
+                        
+                       
                     }
                 }
                 .toolbar {
@@ -41,6 +54,9 @@ struct NewArticleView: View {
                     }
                 }
             }
+            .onAppear(perform: {
+                viewModel.input = .getAllProducts
+            })
             .navigationTitle("News")
         }
     }

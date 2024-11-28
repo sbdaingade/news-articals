@@ -30,6 +30,7 @@ extension DataRequest {
         return validate { request, response, data in
             switch response.statusCode {
             case 200...299:
+               print(String(data: data!, encoding: .utf8)!)
                 return .success(())
             case 401:
                 return .success(())
