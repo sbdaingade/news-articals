@@ -18,11 +18,11 @@ enum TabViewState {
     func getTabbarButtonImage(tabIndex: Int) -> String {
         switch self {
         case .newArticle:
-            return tabIndex == 0 ? "house" :  "house.fill"
+            return tabIndex == 0 ? "house" : "house.fill"
         case .search:
-            return tabIndex == 1 ? "magnifyingglass" :  "magnifyingglass.circle.fill"
+            return tabIndex == 1 ? "magnifyingglass" : "magnifyingglass.circle.fill"
         case .bookmark:
-            return tabIndex == 2 ? "bookmark" :  "bookmark.fill"
+            return tabIndex == 2 ? "bookmark" : "bookmark.fill"
         }
     }
     
@@ -52,7 +52,7 @@ enum TabViewState {
 
 
 struct MainView: View {
-    @State var tabSelection: Int = 1
+    @State var tabSelection: Int = 0
     
     @Environment(\.managedObjectContext) private var viewContext
     init() {

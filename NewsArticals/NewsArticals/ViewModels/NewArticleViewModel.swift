@@ -30,16 +30,17 @@ class  NewArticleViewModel: ObservableObject {
     
     private func getData() {
         Task {
-//            DSNewsArticlesCommunicator.getArticlesDataUsingPublisher().compactMap{$0}.sink { response in
-//                switch response {
-//                case .finished:
-//                    debugPrint("success")
-//                case .failure(let error):
-//                    debugPrint("\(error.localizedDescription)")
-//                }
-//            } receiveValue: {[weak self] articles in
-//                self?.arrOfProducts = articles.articles ?? []
-//            }.store(in: &cancellable)
+            DSNewsArticlesCommunicator.getArticlesData().compactMap{$0}.sink { response in
+                switch response {
+                case .finished:
+                    debugPrint("success")
+                case .failure(let error):
+                    debugPrint("\(error.localizedDescription)")
+                }
+            } receiveValue: {[weak self] articles in
+                self?.arrOfProducts = articles.articles ?? []
+                
+            }.store(in: &cancellable)
         }
     }
 

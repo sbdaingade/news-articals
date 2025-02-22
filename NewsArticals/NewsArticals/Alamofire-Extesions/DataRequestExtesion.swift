@@ -31,6 +31,16 @@ extension DataRequest {
             switch response.statusCode {
             case 200...299:
                print(String(data: data!, encoding: .utf8)!)
+                
+                if let jsonString = String(data: data!, encoding: .utf8) {
+                    let jsonData = jsonString.data(using: .utf8)!
+                    let blogPost: Articles = try! JSONDecoder().decode(Articles.self, from: jsonData)
+                    
+                    debugPrint("\(blogPost)")
+
+                }
+                
+                
                 return .success(())
             case 401:
                 return .success(())

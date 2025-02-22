@@ -10,11 +10,11 @@ import Combine
 import Alamofire
 
 protocol NewsArticlesCommunicatorProtocol {
-    static func getPetsData() -> AnyPublisher<Articles, AFError>
+    static func getArticlesData() -> AnyPublisher<Articles, AFError>
 }
 
 struct DSNewsArticlesCommunicator: NewsArticlesCommunicatorProtocol{
-    static func getPetsData() -> AnyPublisher<Articles, AFError> {
+    static func getArticlesData() -> AnyPublisher<Articles, AFError> {
         LCProductionSession.default.request(SDRouter.getNewsArticles).validateResponseData().publishDecodable(type: Articles.self).value()
     }
     

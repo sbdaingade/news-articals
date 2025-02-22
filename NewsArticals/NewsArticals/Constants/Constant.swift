@@ -18,7 +18,7 @@ struct AppConstant {
     
     // https://newsapi.org/v2/everything?domains=yahoo.com&apiKey=4a4a314c16c94996837a2b0c27ccd767
     
-    
+    // https://newsapi.org/v2/everything?q=apple&apiKey=4a4a314c16c94996837a2b0c27ccd767
     
 }
 /*

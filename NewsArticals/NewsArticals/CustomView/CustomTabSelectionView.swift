@@ -64,7 +64,7 @@ struct SDTabbarButtonImage: View {
     let systemImageName: String
     var state: SDButtonState = .normal
     var isPressed: Bool = false
-    init(systemImageName: String, state:  SDButtonState, isPressed: Bool = false) {
+    init(systemImageName: String, state:  SDButtonState, isPressed: Bool = true) {
         self.systemImageName = systemImageName
         self.state = state
         self.isPressed = isPressed
@@ -86,9 +86,10 @@ struct ButtonPress: ViewModifier {
             .simultaneousGesture (
                 DragGesture (minimumDistance: 0)
                     .onChanged ({_ in
-                        onPress ( )
+                        onPress()
                     })
-                    .onEnded ( { _ in onRelease ( )
+                    .onEnded ( { _ in
+                        onRelease()
                     })
             )
     }
@@ -96,7 +97,7 @@ struct ButtonPress: ViewModifier {
 
 extension View {
     func pressEvents(onPress: @escaping (() -> Void), onRelease: @escaping (() -> Void)) -> some View {
-        modifier (ButtonPress(onPress: {
+        modifier(ButtonPress(onPress: {
             onPress()
         }, onRelease: {
             onRelease()
