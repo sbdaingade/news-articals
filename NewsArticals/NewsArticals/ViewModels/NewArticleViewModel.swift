@@ -37,8 +37,10 @@ class  NewArticleViewModel: ObservableObject {
                 case .failure(let error):
                     debugPrint("\(error.localizedDescription)")
                 }
-            } receiveValue: {[weak self] articles in
-                self?.arrOfProducts = articles.articles ?? []
+            } receiveValue: {[weak self] articlesData in
+                self?.arrOfProducts = []
+                self?.arrOfProducts = articlesData.articles ?? []
+                debugPrint("\(String(describing: self?.arrOfProducts.first?.title))")
                 
             }.store(in: &cancellable)
         }

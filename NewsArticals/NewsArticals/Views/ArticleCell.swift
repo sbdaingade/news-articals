@@ -16,15 +16,23 @@ struct ArticleCell: View {
 
             AsyncImage(url: URL(string: viewModel.urlString),content: asyncImageView)
                 .frame(width:100, height:100)
-                .background(Color.gray)
                 .cornerRadius(10.0)
             VStack(alignment: .leading) {
                 Text(viewModel.title)
                     .multilineTextAlignment(.leading)
                     .lineLimit(1)
                     .font(.title3)
+                Text(viewModel.description)
+                    .multilineTextAlignment(.leading)
+                    .lineLimit(0)
+                    .font(.subheadline)
             }
         }
+        .background(
+            Color.gray.opacity(0.2)
+        )
+        .cornerRadius(10.0)
+
     }
     
     @ViewBuilder
@@ -49,4 +57,8 @@ struct ArticleCell: View {
                 .foregroundColor(.gray)
         }
     }
+}
+
+#Preview {
+    ArticleCell(viewModel: ArticleCellViewModel(withArticle: Article(source: Source.init(id: "1", name: "test"), author: "", title: "Sachin", description: "test", url: "", urlToImage: "https://avatars.githubusercontent.com/u/16917540?v=4", publishedAt: "", content: "")))
 }

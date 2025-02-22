@@ -23,20 +23,18 @@ struct NewArticleView: View {
                             .frame(minHeight: 280)
                         SubTitleView(title: "News Articles")
                         
-//                        List(viewModel.arrOfProducts) { product in
-//                            ScrollView {
-//                                let viewModel = ArticleCellViewModel(withArticle: product)
-//                                NavigationLink {
-//                                    // ProductDetailView(product: product)
-//                                } label: {
-//                                    ArticleCell(viewModel: viewModel)
-//                                }
-//                            }
-//                        }
-                        
-                       
+                        ScrollView {
+                            LazyVStack(spacing: 5) {
+                                ForEach(0..<viewModel.arrOfProducts.count, id: \.self) { index in
+                                    let product = viewModel.arrOfProducts[index]
+                                    let viewModel = ArticleCellViewModel(withArticle: product)
+                                    ArticleCell(viewModel: viewModel)
+                                }
+                            }
+                            .padding(.init(top: 0, leading: 16, bottom: 0, trailing: 16))
+                        } //scrollview
                     }
-                }//scrollview
+                }
                 .toolbar {
                     HStack {
                         DatePicker(

@@ -21,7 +21,8 @@ struct Articles: Codable {
 }
 
 // MARK: - Article
-struct Article: Codable {
+struct Article: Codable ,Identifiable {
+    var id: UUID { UUID() }
     let source: Source?
     let author: String?
     let title: String?
@@ -30,7 +31,7 @@ struct Article: Codable {
     let urlToImage: String?
     let publishedAt: String?
     let content: String?
-    var id: UUID?
+    var nid: UUID?
     
     private enum CodingKeys: String, CodingKey {
         case source = "source"
@@ -41,7 +42,7 @@ struct Article: Codable {
         case urlToImage = "urlToImage"
         case publishedAt = "publishedAt"
         case content = "content"
-        case id = "id"
+        case nid = "id"
     }
     
 }
