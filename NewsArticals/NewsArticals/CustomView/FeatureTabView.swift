@@ -7,27 +7,25 @@
 
 import SwiftUI
 
-struct Player: Identifiable{
-    let id: UUID = UUID()
-    let name: String
-    let image: String
-}
-
-
-
 struct FeatureTabView: View {
-    let players: [Player] = [Player(name: "", image: "https://www.vskills.in/certification/blog/wp-content/uploads/2015/01/structure-of-a-news-report.jpg"),Player(name: "", image: "https://www.vskills.in/certification/blog/wp-content/uploads/2015/01/structure-of-a-news-report.jpg"),Player(name: "", image: "https://www.vskills.in/certification/blog/wp-content/uploads/2015/01/structure-of-a-news-report.jpg")]
-    
+    @StateObject var viewModel = FeatureViewModel()
+    @State private var currentPage = 0
     var body: some View {
-        TabView {
-            ForEach(players) { player in
-                FeatureItemView(player: player)
-                    .padding(.top, 10)
-                    .padding(.horizontal,15)
+        
+        TabView(selection: $currentPage) {
+            ForEach(viewModel.arrOfWorldStreetJournalProducts) { post in
+                FeatureItemView(article: post)
             }
         }
-        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
-  }
+        .tabViewStyle(PageTabViewStyle())
+        .indexViewStyle(PageIndexViewStyle()) // Page indicator dots
+        
+        .onAppear {
+            if viewModel.arrOfWorldStreetJournalProducts.count == 0 {
+                viewModel.input = .getWorldStreetJournalProducts
+            }
+        }
+    }
 }
 
 struct FeatureTabView_Previews: PreviewProvider {
@@ -35,4 +33,3 @@ struct FeatureTabView_Previews: PreviewProvider {
         FeatureTabView()
     }
 }
-

@@ -1,21 +1,18 @@
 //
-//  NewArticleViewModel.swift
+//  FeatureTabViewModel.swift
 //  NewsArticals
 //
-//  Created by Sachin Daingade on 24/11/24.
+//  Created by Sachin Daingade on 22/02/25.
 //
-
-import Foundation
 import Combine
+import Foundation
 
-@MainActor
-class  NewArticleViewModel: ObservableObject {
-    @Published private(set) var arrOfProducts = [Article]()
-
+class FeatureViewModel: ObservableObject {
+    @Published var arrOfWorldStreetJournalProducts: [Article] = []
     private var cancellable = Set<AnyCancellable>()
     
     public enum Input {
-        case getAllProducts
+        case getWorldStreetJournalProducts
     }
     
     @Published public var input: Input?
@@ -23,15 +20,16 @@ class  NewArticleViewModel: ObservableObject {
     init() {
         $input.compactMap{$0}.sink {[unowned self] action in
             switch action {
-            case .getAllProducts:
-                getData()
+            case .getWorldStreetJournalProducts:
+                getDataWorldSJ()
             }
         }.store(in: &cancellable)
     }
     
-    private func getData() {
+    
+    private func getDataWorldSJ() {
         Task {
-            DSNewsArticlesCommunicator.getArticlesData().compactMap{$0}.sink { response in
+            DSNewsArticlesCommunicator.getWorldStreetJournalArticlesData().compactMap{$0}.sink { response in
                 switch response {
                 case .finished:
                     debugPrint("success")
@@ -39,10 +37,9 @@ class  NewArticleViewModel: ObservableObject {
                     debugPrint("\(error.localizedDescription)")
                 }
             } receiveValue: {[weak self] articlesData in
-                self?.arrOfProducts = []
-                self?.arrOfProducts = articlesData.articles ?? []
-                debugPrint("\(String(describing: self?.arrOfProducts.first?.title))")
-                
+                self?.arrOfWorldStreetJournalProducts = []
+                self?.arrOfWorldStreetJournalProducts = articlesData.articles ?? []
+                debugPrint("\(String(describing: self?.arrOfWorldStreetJournalProducts.first?.title))")
             }.store(in: &cancellable)
         }
     }

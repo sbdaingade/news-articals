@@ -28,9 +28,7 @@ struct ArticleCell: View {
                     .font(.subheadline)
             }
         }
-        .background(
-            Color.gray.opacity(0.2)
-        )
+        .background(Color.blue.opacity(0.1))
         .cornerRadius(10.0)
 
     }

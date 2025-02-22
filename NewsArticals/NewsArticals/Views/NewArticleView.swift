@@ -19,8 +19,9 @@ struct NewArticleView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 10) {
                         FeatureTabView()
-                            .padding(.vertical, 0)
-                            .frame(minHeight: 280)
+                          //  .padding(.vertical, 0)
+                            .frame(minHeight: 300)
+                            .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                         SubTitleView(title: "News Articles")
                         
                         ScrollView {
@@ -71,7 +72,10 @@ struct NewArticleView: View {
                 
             }
             .onAppear(perform: {
-                viewModel.input = .getAllProducts
+                
+               if viewModel.arrOfProducts.count == 0 {
+                    viewModel.input = .getAllProducts
+                }
             })
             .navigationTitle("News")
         }
