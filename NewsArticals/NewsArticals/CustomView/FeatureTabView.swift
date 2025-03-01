@@ -14,7 +14,11 @@ struct FeatureTabView: View {
         
         TabView(selection: $currentPage) {
             ForEach(viewModel.arrOfWorldStreetJournalProducts) { post in
-                FeatureItemView(article: post)
+                NavigationLink {
+                    ArticleNewDetail(articleDetail: post)
+                } label: {
+                    FeatureItemView(article: post)
+                }
             }
         }
         .tabViewStyle(PageTabViewStyle())

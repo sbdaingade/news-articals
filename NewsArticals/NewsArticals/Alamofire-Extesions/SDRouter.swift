@@ -9,7 +9,7 @@ import Alamofire
 import Foundation
 
 public enum SDRouter: URLRequestConvertible {
-    static let baseAPIVersion = "https://newsapi.org/v2/everything?q=tesla&from=2025-02-14&sortBy=publishedAt&apiKey=4a4a314c16c94996837a2b0c27ccd767"
+    static let baseAPIVersion = "https://newsapi.org/v2/everything?q=tesla&from=2025-02-02&sortBy=publishedAt&apiKey=4a4a314c16c94996837a2b0c27ccd767"
     case groups(forSiteWithID: Int)
     case getPetsData
     case getNewsArticles
