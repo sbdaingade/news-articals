@@ -9,10 +9,10 @@ import Alamofire
 import Foundation
 
 public enum SDRouter: URLRequestConvertible {
-    static let baseAPIVersion = "https://newsapi.org/v2/everything?q=tesla&from=2025-02-02&sortBy=publishedAt&apiKey=4a4a314c16c94996837a2b0c27ccd767"
+    static let baseAPIVersion = "https://newsapi.org/v2/everything?q=tesla&from=2025-02-15&sortBy=publishedAt&apiKey=4a4a314c16c94996837a2b0c27ccd767"
     case groups(forSiteWithID: Int)
     case getPetsData
-    case getNewsArticles
+    case getNewsArticles(String)
     case getWorldStreetJournal
     var method: HTTPMethod {
         switch self {
@@ -33,8 +33,9 @@ public enum SDRouter: URLRequestConvertible {
                  return "/site/\(site_id)/groups/"
         case .getPetsData:
             return "/89bc67a9845e640ae6ce"
-        case .getNewsArticles:
+        case .getNewsArticles(let date):
             return ""
+         //   return "https://newsapi.org/v2/everything?q=tesla&from=\(date)&sortBy=publishedAt&apiKey=4a4a314c16c94996837a2b0c27ccd767"
         case .getWorldStreetJournal:
             return "https://newsapi.org/v2/everything?domains=wsj.com&apiKey=4a4a314c16c94996837a2b0c27ccd767"
         }

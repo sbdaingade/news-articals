@@ -15,7 +15,7 @@ class  NewArticleViewModel: ObservableObject {
     private var cancellable = Set<AnyCancellable>()
     
     public enum Input {
-        case getAllProducts
+        case getAllProducts(Date)
     }
     
     @Published public var input: Input?
@@ -23,15 +23,19 @@ class  NewArticleViewModel: ObservableObject {
     init() {
         $input.compactMap{$0}.sink {[unowned self] action in
             switch action {
-            case .getAllProducts:
-                getData()
+            case .getAllProducts(let date):
+                getData(date)
             }
         }.store(in: &cancellable)
     }
     
-    private func getData() {
+    private func getData(_ date: Date) {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        debugPrint(dateFormatter.string(from: date))
+
         Task {
-            DSNewsArticlesCommunicator.getArticlesData().compactMap{$0}.sink { response in
+            DSNewsArticlesCommunicator.getArticlesData(strDate: dateFormatter.string(from: date)).compactMap{$0}.sink { response in
                 switch response {
                 case .finished:
                     debugPrint("success")

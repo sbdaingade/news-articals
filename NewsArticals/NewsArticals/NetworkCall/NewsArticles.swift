@@ -10,7 +10,7 @@ import Combine
 import Alamofire
 
 protocol NewsArticlesCommunicatorProtocol {
-    static func getArticlesData() -> AnyPublisher<Articles, AFError>
+    static func getArticlesData(strDate: String) -> AnyPublisher<Articles, AFError>
     static func getWorldStreetJournalArticlesData() -> AnyPublisher<Articles, AFError>
 }
 
@@ -19,8 +19,8 @@ struct DSNewsArticlesCommunicator: NewsArticlesCommunicatorProtocol{
         LCProductionSession.default.request(SDRouter.getWorldStreetJournal).validateResponseData().publishDecodable(type: Articles.self).value()
     }
     
-    static func getArticlesData() -> AnyPublisher<Articles, AFError> {
-        LCProductionSession.default.request(SDRouter.getNewsArticles).validateResponseData().publishDecodable(type: Articles.self).value()
+    static func getArticlesData(strDate: String) -> AnyPublisher<Articles, AFError> {
+        LCProductionSession.default.request(SDRouter.getNewsArticles(strDate)).validateResponseData().publishDecodable(type: Articles.self).value()
     }
     
     

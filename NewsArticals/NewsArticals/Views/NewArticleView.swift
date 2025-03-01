@@ -9,7 +9,7 @@ import SwiftUI
 
 struct NewArticleView: View {
     @Binding var tabselection: Int
-    @State private var date = Calendar.current.date(byAdding: .day, value: -3, to: Date())!
+    @State private var date = Calendar.current.date(byAdding: .day, value: -15, to: Date())!
     @StateObject var viewModel = NewArticleViewModel()
     @State var isPresented: Bool = false
 
@@ -78,7 +78,7 @@ struct NewArticleView: View {
             .onAppear(perform: {
                 
                if viewModel.arrOfProducts.count == 0 {
-                    viewModel.input = .getAllProducts
+                   viewModel.input = .getAllProducts(date)
                 }
             })
             .navigationTitle("News")
