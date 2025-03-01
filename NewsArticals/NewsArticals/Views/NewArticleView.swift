@@ -19,7 +19,7 @@ struct NewArticleView: View {
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 10) {
                         FeatureTabView()
-                          //  .padding(.vertical, 0)
+                        //  .padding(.vertical, 0)
                             .frame(minHeight: 300)
                             .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
                         SubTitleView(title: "News Articles")
@@ -28,8 +28,12 @@ struct NewArticleView: View {
                             LazyVStack(spacing: 5) {
                                 ForEach(0..<viewModel.arrOfProducts.count, id: \.self) { index in
                                     let product = viewModel.arrOfProducts[index]
-                                    let viewModel = ArticleCellViewModel(withArticle: product)
-                                    ArticleCell(viewModel: viewModel)
+                                    NavigationLink {
+                                        ArticleNewDetail(articleDetail: product)
+                                    } label: {
+                                        let viewModel = ArticleCellViewModel(withArticle: product)
+                                        ArticleCell(viewModel: viewModel)
+                                    }
                                 }
                             }
                             .padding(.init(top: 0, leading: 16, bottom: 0, trailing: 16))
