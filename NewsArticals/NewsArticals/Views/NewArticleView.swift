@@ -16,6 +16,21 @@ struct NewArticleView: View {
     var body: some View {
         NavigationStack {
             ZStack {
+                MeshGradient(
+                    width: 3,
+                    height: 3,
+                    points: [
+                        [0.0, 0.0], [0.5, 0.0], [1.0, 0.0],
+                        [0.0, 0.5], [0.3, 1.0], [1.0, 1.0],
+                        [0.0, 1.0], [0.2, 1.0], [1.0, 1.0]
+                    ],
+                    colors: [
+                        .teal,.gray,.teal,
+                        .white, .white, .black,
+                        .black, .teal, .black
+                    ]
+                )
+                .ignoresSafeArea()
                 ScrollView(.vertical, showsIndicators: false) {
                     VStack(spacing: 10) {
                         FeatureTabView()
@@ -33,6 +48,7 @@ struct NewArticleView: View {
                                     } label: {
                                         let viewModel = ArticleCellViewModel(withArticle: product)
                                         ArticleCell(viewModel: viewModel)
+                                           
                                     }
                                 }
                             }
@@ -75,6 +91,7 @@ struct NewArticleView: View {
                     
                 
             }
+           
             .onAppear(perform: {
                 
                if viewModel.arrOfProducts.count == 0 {
@@ -82,6 +99,7 @@ struct NewArticleView: View {
                 }
             })
             .navigationTitle("News")
+            
         }
     }
 }

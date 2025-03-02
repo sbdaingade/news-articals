@@ -21,10 +21,12 @@ struct ArticleCell: View {
                 Text(viewModel.title)
                     .multilineTextAlignment(.leading)
                     .lineLimit(1)
+                    .foregroundColor(.black)
                     .font(.title3)
                 Text(viewModel.description)
                     .multilineTextAlignment(.leading)
                     .lineLimit(0)
+                    .foregroundColor(.black)
                     .font(.subheadline)
             }
         }
