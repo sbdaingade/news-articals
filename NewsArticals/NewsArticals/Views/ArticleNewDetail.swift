@@ -6,10 +6,11 @@
 //
 
 import SwiftUI
+import Translation
 
 struct ArticleNewDetail: View {
     var articleDetail: Article
-    
+    @State private var showTransalation: Bool = false
     var body: some View {
         
         VStack(alignment: .leading, spacing: 8) {
@@ -42,12 +43,27 @@ struct ArticleNewDetail: View {
 
             
             ScrollView {
+              
+                
                 Text(articleDetail.description ?? "")
                     .font(.subheadline)
             }
-            
+            .translationPresentation(isPresented: $showTransalation, text: articleDetail.description ?? "")
         } //: VSTACK
         .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
         .navigationTitle("Details")
+        .toolbar {
+             ToolbarItem(placement: .navigationBarTrailing) {
+                 Menu(content: {
+                     Button("Translate article") {
+                         showTransalation = true
+                     }
+                     Button("Cancel") {
+                     }
+                 }, label: {
+                     Image(systemName: "translate")
+                 })
+              }
+          }
     }
 }
