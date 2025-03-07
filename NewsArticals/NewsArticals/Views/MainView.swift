@@ -56,7 +56,11 @@ struct MainView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     init() {
-        UITabBar.appearance().backgroundColor = UIColor.init(white: 0.8, alpha: 0.7)
+        if #available(iOS 13.0, *) {
+            let appearance = UITabBarAppearance()
+            appearance.backgroundColor = .clear
+            UITabBar.appearance().standardAppearance = appearance
+        }
     }
     var body: some View {
         TabView(selection: $tabSelection) {

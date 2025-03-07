@@ -25,9 +25,9 @@ struct NewArticleView: View {
                         [0.0, 1.0], [0.2, 1.0], [1.0, 1.0]
                     ],
                     colors: [
-                        .teal,.gray,.teal,
-                        .white, .white, .black,
-                        .black, .teal, .black
+                        .teal,.cyan,.teal,
+                        .white, .white, .white,
+                        .white, .teal, .white
                     ]
                 )
                 .ignoresSafeArea()
@@ -99,8 +99,10 @@ struct NewArticleView: View {
                 }
             })
             .navigationTitle("News")
-            
+
         }
+        .toolbarBackground(Color.cyan, for: .navigationBar)
+
     }
 }
 
