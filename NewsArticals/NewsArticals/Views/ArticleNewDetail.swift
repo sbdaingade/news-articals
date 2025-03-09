@@ -7,10 +7,12 @@
 
 import SwiftUI
 import Translation
+import TipKit
 
 struct ArticleNewDetail: View {
     var articleDetail: Article
     @State private var showTransalation: Bool = false
+    let translationTip = ShowTransalationTip()
     var body: some View {
         
         ZStack {
@@ -59,11 +61,11 @@ struct ArticleNewDetail: View {
                 
                 
                 ScrollView {
-                    
-                    
                     Text(articleDetail.description ?? "")
                         .font(.subheadline)
                 }
+                .popoverTip(translationTip, arrowEdge: .bottom)
+
                 .translationPresentation(isPresented: $showTransalation, text: articleDetail.description ?? "")
             } //: VSTACK
             .padding(EdgeInsets(top: 0, leading: 16, bottom: 0, trailing: 16))
@@ -74,6 +76,7 @@ struct ArticleNewDetail: View {
                         Button("Translate article") {
                             showTransalation = true
                         }
+
                         Button("Cancel") {
                         }
                     }, label: {
@@ -81,6 +84,11 @@ struct ArticleNewDetail: View {
                     })
                 }
             }
+            
+
+        }
+        .task {
+            try? Tips.configure()
         }
     }
 }

@@ -35,6 +35,7 @@ struct SearchView: View {
             
             List(filteredItems, id: \.self) { item in
                 Text(item)
+
             }
         }
         .navigationTitle("Languages")
