@@ -8,8 +8,20 @@
 import Alamofire
 import Foundation
 
+struct CommonConstants {
+
+   
+    static func dateFromWebtoApp() -> String {
+        let ddate = Calendar.current.date(byAdding: .day, value: -15, to: Date())!
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: ddate)
+    }
+    
+}
+
 public enum SDRouter: URLRequestConvertible {
-    static let baseAPIVersion = "https://newsapi.org/v2/everything?q=tesla&from=2025-02-15&sortBy=publishedAt&apiKey=4a4a314c16c94996837a2b0c27ccd767"
+    static let baseAPIVersion = "https://newsapi.org/v2/everything?q=India&from=\(CommonConstants.dateFromWebtoApp())&sortBy=publishedAt&apiKey=4a4a314c16c94996837a2b0c27ccd767"
     case groups(forSiteWithID: Int)
     case getPetsData
     case getNewsArticles(String)

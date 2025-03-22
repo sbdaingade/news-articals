@@ -101,7 +101,13 @@ struct NewArticleView: View {
             .navigationTitle("News")
 
         }
-        .toolbarBackground(Color.cyan, for: .navigationBar)
+//        .toolbarColorScheme(.dark, for: .navigationBar)
+//
+//        .toolbarBackground(Color.cyan, for: .navigationBar)
+        .toolbarBackground(
+                       Color.pink,
+                       for: .navigationBar)
+        .toolbarBackground(.visible, for: .navigationBar)
 
     }
 }
