@@ -10,7 +10,8 @@ import Foundation
 class FeatureViewModel: ObservableObject {
     @Published var arrOfWorldStreetJournalProducts: [Article] = []
     private var cancellable = Set<AnyCancellable>()
-    
+    @Published public private(set) var loadingState: LoadingState = LoadingState.idle
+
     public enum Input {
         case getWorldStreetJournalProducts
     }
@@ -28,13 +29,17 @@ class FeatureViewModel: ObservableObject {
     
     
     private func getDataWorldSJ() {
+        loadingState = .loading
         Task {
             DSNewsArticlesCommunicator.getWorldStreetJournalArticlesData().compactMap{$0}.sink { response in
                 switch response {
                 case .finished:
                     debugPrint("success")
+                    self.loadingState = .idle
                 case .failure(let error):
                     debugPrint("\(error.localizedDescription)")
+                    self.loadingState = .idle
+                    self.loadingState = .failed(error.localizedDescription)
                 }
             } receiveValue: {[weak self] articlesData in
                 self?.arrOfWorldStreetJournalProducts = []

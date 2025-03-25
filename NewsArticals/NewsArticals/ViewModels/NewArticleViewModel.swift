@@ -11,7 +11,7 @@ import Combine
 @MainActor
 class  NewArticleViewModel: ObservableObject {
     @Published private(set) var arrOfProducts = [Article]()
-
+    @Published public private(set) var loadingState: LoadingState = LoadingState.idle
     private var cancellable = Set<AnyCancellable>()
     
     public enum Input {
@@ -30,6 +30,7 @@ class  NewArticleViewModel: ObservableObject {
     }
     
     private func getData(_ date: Date) {
+        loadingState = .loading
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         debugPrint(dateFormatter.string(from: date))
@@ -39,8 +40,12 @@ class  NewArticleViewModel: ObservableObject {
                 switch response {
                 case .finished:
                     debugPrint("success")
+                    self.loadingState = .idle
                 case .failure(let error):
                     debugPrint("\(error.localizedDescription)")
+                    self.loadingState = .idle
+                    self.loadingState = .failed(error.localizedDescription)
+
                 }
             } receiveValue: {[weak self] articlesData in
                 self?.arrOfProducts = []
