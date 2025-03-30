@@ -12,10 +12,13 @@ import Combine
 class  NewArticleViewModel: ObservableObject {
     @Published private(set) var arrOfProducts = [Article]()
     @Published public private(set) var loadingState: LoadingState = LoadingState.idle
+    @Published private(set) var arrOfSearchProducts = [Article]()
+
     private var cancellable = Set<AnyCancellable>()
     
     public enum Input {
         case getAllProducts(Date)
+        case search(String)
     }
     
     @Published public var input: Input?
@@ -25,6 +28,8 @@ class  NewArticleViewModel: ObservableObject {
             switch action {
             case .getAllProducts(let date):
                 getData(date)
+            case .search(let str):
+                searchArticleData(str)
             }
         }.store(in: &cancellable)
     }
@@ -55,6 +60,32 @@ class  NewArticleViewModel: ObservableObject {
             }.store(in: &cancellable)
         }
     }
+    
+    
+    private func searchArticleData(_ searchQuery: String) {
+        loadingState = .loading
+        if searchQuery.isEmpty {
+            return
+        }
+        Task {
+            DSNewsArticlesCommunicator.searchArticlesDataUsingPublisher(searchQuery: searchQuery).compactMap{$0}.sink { response in
+                switch response {
+                case .finished:
+                    debugPrint("success")
+                    self.loadingState = .idle
+                case .failure(let error):
+                    debugPrint("\(error.localizedDescription)")
+                    self.loadingState = .idle
+                    self.loadingState = .failed(error.localizedDescription)
+                }
+            } receiveValue: {[weak self] articlesData in
+                self?.arrOfSearchProducts = []
+                self?.arrOfSearchProducts = articlesData.articles ?? []
+                debugPrint("\(String(describing: self?.arrOfSearchProducts.first?.title))")
+            }.store(in: &cancellable)
+        }
+    }
+    
     
     deinit {
         cancellable.forEach{$0.cancel()}

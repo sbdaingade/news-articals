@@ -26,6 +26,7 @@ public enum SDRouter: URLRequestConvertible {
     case getPetsData
     case getNewsArticles(String)
     case getWorldStreetJournal
+    case searchArticles(String)
     var method: HTTPMethod {
         switch self {
         case .groups:
@@ -35,6 +36,8 @@ public enum SDRouter: URLRequestConvertible {
         case .getNewsArticles:
             return .get
         case .getWorldStreetJournal:
+            return .get
+        case .searchArticles(_):
             return .get
         }
     }
@@ -50,6 +53,9 @@ public enum SDRouter: URLRequestConvertible {
          //   return "https://newsapi.org/v2/everything?q=tesla&from=\(date)&sortBy=publishedAt&apiKey=4a4a314c16c94996837a2b0c27ccd767"
         case .getWorldStreetJournal:
             return "https://newsapi.org/v2/everything?domains=wsj.com&apiKey=4a4a314c16c94996837a2b0c27ccd767"
+        case .searchArticles(let query):
+            return "https://newsapi.org/v2/everything?q=\(query)&sortBy=publishedAt&apiKey=4a4a314c16c94996837a2b0c27ccd767"
+
         }
     }
     
@@ -75,6 +81,11 @@ public enum SDRouter: URLRequestConvertible {
             urlRequest = try URLEncoding.default.encode(urlRequest, with: nil)
         case .getWorldStreetJournal:
             url = Foundation.URL(string: "https://newsapi.org/v2/everything?domains=wsj.com&apiKey=4a4a314c16c94996837a2b0c27ccd767")!
+            urlRequest = URLRequest(url: url)
+            urlRequest.httpMethod = method.rawValue
+            urlRequest = try URLEncoding.default.encode(urlRequest, with: nil)
+        case .searchArticles(let query):
+            url = Foundation.URL(string: "https://newsapi.org/v2/everything?q=\(query)&sortBy=publishedAt&apiKey=4a4a314c16c94996837a2b0c27ccd767")!
             urlRequest = URLRequest(url: url)
             urlRequest.httpMethod = method.rawValue
             urlRequest = try URLEncoding.default.encode(urlRequest, with: nil)
