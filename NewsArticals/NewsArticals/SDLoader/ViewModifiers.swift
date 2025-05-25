@@ -30,12 +30,12 @@ struct SDLoaderStateModifier: ViewModifier {
     let loadingState: Published<LoadingState>.Publisher
     @State private var showActivityIndicator: Bool = false
     @State private var errorMessage: IdentifiableObject<String>?
-    var message:String?
+    @State var message:String?
     func body(content: Content) -> some View {
         ZStack {
             content
             if showActivityIndicator {
-                SDHUDLoader(message: message)
+                SDHUDLoader(message: $message)
             }
         }
         .alert(item: $errorMessage, content:{ error in
@@ -44,8 +44,13 @@ struct SDLoaderStateModifier: ViewModifier {
         .onReceive(loadingState, perform: { loadingState in
             switch loadingState {
             case .idle:
-                showActivityIndicator = false
+                message = "Almost there"
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                    showActivityIndicator = false
+                    message = "Loading..."
+                }
             case .loading:
+                message = "Loading..."
                 showActivityIndicator = true
             case .failed(let errorString):
                 showActivityIndicator = false

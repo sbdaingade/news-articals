@@ -10,11 +10,7 @@ struct SDHUDLoader: View {
     
     @State private var rotation: Double = 0
     @State private var scale: CGFloat = 1.0
-    let message: String?
-    
-    init(message: String? = nil) {
-        self.message = message
-    }
+    @Binding var message: String?
     
     var body: some View {
         ZStack {
@@ -55,5 +51,5 @@ struct SDHUDLoader: View {
 }
 
 #Preview {
-    SDHUDLoader(message: "Loader...")
+    SDHUDLoader(message: .constant("Loading..."))
 }
