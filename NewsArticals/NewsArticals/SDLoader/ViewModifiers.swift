@@ -38,6 +38,7 @@ struct SDLoaderStateModifier: ViewModifier {
                 SDHUDLoader(message: $message)
             }
         }
+        .allowsHitTesting(!showActivityIndicator)
         .alert(item: $errorMessage, content:{ error in
             Alert(title: Text("Error"), message: Text("\(error.value)"), dismissButton: nil)
         } )
