@@ -34,10 +34,22 @@ struct SDLoaderStateModifier: ViewModifier {
     func body(content: Content) -> some View {
         ZStack {
             content
-            if showActivityIndicator {
-                SDHUDLoader(message: $message)
-            }
+//            if showActivityIndicator {
+//                SDHUDLoader(message: $message)
+//            }
+            
+                .fullScreenCover(isPresented: $showActivityIndicator) {
+                    ZStack {
+                        SDHUDLoader(message: $message)
+                    }
+                   // .background(Color.black.opacity(0.5))
+                }
+                .transaction( { transaction in
+                    transaction.disablesAnimations = true
+                })
+                .background(Color.clear)
         }
+        .interactiveDismissDisabled(true)
         .allowsHitTesting(!showActivityIndicator)
         .alert(item: $errorMessage, content:{ error in
             Alert(title: Text("Error"), message: Text("\(error.value)"), dismissButton: nil)

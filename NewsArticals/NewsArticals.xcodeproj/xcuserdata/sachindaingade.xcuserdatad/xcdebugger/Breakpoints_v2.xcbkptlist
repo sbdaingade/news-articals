@@ -30,8 +30,8 @@
             filePath = "NewsArticals/Views/MainView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "88"
+            endingLineNumber = "88"
             landmarkName = "tabView(tabType:)"
             landmarkType = "7">
          </BreakpointContent>

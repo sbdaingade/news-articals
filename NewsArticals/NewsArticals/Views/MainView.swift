@@ -81,7 +81,6 @@ struct MainView: View {
                     debugPrint("Index selected \(tabSelection)")
                 })
         }
-        
     }
     
     func tabView(tabType: TabViewState) -> some View {

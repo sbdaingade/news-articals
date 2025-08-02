@@ -14,7 +14,7 @@ struct SDHUDLoader: View {
     
     var body: some View {
         ZStack {
-            Color.black.opacity(0.3).ignoresSafeArea()
+            Color.black.opacity(0.5).ignoresSafeArea()
             VStack {
                 Circle()
                     .trim(from: 0, to: 0.7)
@@ -46,7 +46,6 @@ struct SDHUDLoader: View {
             .cornerRadius(15)
             
         }
-        .allowsHitTesting(false)
     }
 }
 
