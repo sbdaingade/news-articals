@@ -52,7 +52,7 @@ struct SearchView: View {
                     }
                 }
                 .navigationTitle("Search")
-                .sdHUD(viewModel.$loadingState, message: "Searching...")
+                .sdHUD(viewModel.$loadingState, loaderModel: viewModel.$loadingModel)
             }
         }
     }

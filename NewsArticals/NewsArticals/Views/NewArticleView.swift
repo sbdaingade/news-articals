@@ -99,7 +99,7 @@ struct NewArticleView: View {
                 }
             })
             .navigationTitle("News")
-            .sdHUD(viewModel.$loadingState, message: "Loading...")
+            .sdHUD(viewModel.$loadingState, loaderModel: viewModel.$loadingModel)
 
         }
 //        .toolbarColorScheme(.dark, for: .navigationBar)

@@ -8,6 +8,15 @@
 import Combine
 import SwiftUI
 
+struct LoaderModel {
+    var title: String?
+    var subTitle: String?
+    var icon: String?
+    var titleFont: Font?
+    var subTitleFont: Font?
+    var backgroundColor: Color?
+}
+
 public enum LoadingState: Equatable {
     case idle
     case loading
@@ -28,9 +37,12 @@ public struct IdentifiableObject<T: Hashable>: Identifiable {
 
 struct SDLoaderStateModifier: ViewModifier {
     let loadingState: Published<LoadingState>.Publisher
+    let loaderModelState: Published<LoaderModel>.Publisher
+    
+    
     @State private var showActivityIndicator: Bool = false
     @State private var errorMessage: IdentifiableObject<String>?
-    @State var message:String?
+    @State var loaderModel :LoaderModel? = LoaderModel()
     func body(content: Content) -> some View {
         ZStack {
             content
@@ -40,7 +52,8 @@ struct SDLoaderStateModifier: ViewModifier {
             
                 .fullScreenCover(isPresented: $showActivityIndicator) {
                     ZStack {
-                        SDHUDLoader(message: $message)
+                        //SDHUDLoader(message: $message)
+                        SDHUDLoader(loaderModel: $loaderModel)
                     }
                    // .background(Color.black.opacity(0.5))
                 }
@@ -54,16 +67,15 @@ struct SDLoaderStateModifier: ViewModifier {
         .alert(item: $errorMessage, content:{ error in
             Alert(title: Text("Error"), message: Text("\(error.value)"), dismissButton: nil)
         } )
+        .onReceive(loaderModelState) { model in
+            loaderModel = model
+        }
+        
         .onReceive(loadingState, perform: { loadingState in
             switch loadingState {
             case .idle:
-                message = "Almost there"
-                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-                    showActivityIndicator = false
-                    message = "Loading..."
-                }
+                showActivityIndicator = false
             case .loading:
-                message = "Loading..."
                 showActivityIndicator = true
             case .failed(let errorString):
                 showActivityIndicator = false
@@ -75,7 +87,7 @@ struct SDLoaderStateModifier: ViewModifier {
 
 extension View {
  
-    func sdHUD(_ loadingState: Published<LoadingState>.Publisher, message: String? = nil) -> some View {
-        modifier(SDLoaderStateModifier(loadingState: loadingState, message: message))
+    func sdHUD(_ loadingState: Published<LoadingState>.Publisher, loaderModel: Published<LoaderModel>.Publisher) -> some View {
+        modifier(SDLoaderStateModifier(loadingState: loadingState, loaderModelState: loaderModel))
     }
 }

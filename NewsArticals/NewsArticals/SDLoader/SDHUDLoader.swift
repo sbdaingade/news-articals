@@ -10,7 +10,7 @@ struct SDHUDLoader: View {
     
     @State private var rotation: Double = 0
     @State private var scale: CGFloat = 1.0
-    @Binding var message: String?
+    @Binding var loaderModel: LoaderModel?
     
     var body: some View {
         ZStack {
@@ -33,12 +33,26 @@ struct SDHUDLoader: View {
                         }
                     }
 
-                if let message = message {
+                if let img = loaderModel?.icon {
+                    Image(img)
+                        .font(.system(size: 36))
+                        .padding(.top, 10)
+                }
+                
+                if let message = loaderModel?.title {
                     Text(message)
                         .padding(.top, 15)
                         .font(.headline)
                         .foregroundColor(.white)
                 }
+                
+                if let subTitle = loaderModel?.subTitle {
+                    Text(subTitle)
+                        .padding(.top, 15)
+                        .font(.subheadline)
+                        .foregroundColor(.white)
+                }
+                
             }
             .padding(30)
             .background(Color.black.opacity(0.8))
@@ -50,5 +64,6 @@ struct SDHUDLoader: View {
 }
 
 #Preview {
-    SDHUDLoader(message: .constant("Loading..."))
+    @Previewable @State var model: LoaderModel? = LoaderModel()
+    return SDHUDLoader(loaderModel: $model)
 }
