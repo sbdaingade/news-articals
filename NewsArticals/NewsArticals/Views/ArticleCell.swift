@@ -23,16 +23,18 @@ struct ArticleCell: View {
                     .lineLimit(1)
                     .foregroundColor(.black)
                     .font(.title3)
+                   // .accessibilityIdentifier("ArticleTitle")
                 Text(viewModel.description)
                     .multilineTextAlignment(.leading)
                     .lineLimit(0)
                     .foregroundColor(.black)
                     .font(.subheadline)
+                  //  .accessibilityIdentifier("ArticleDescription")
             }
         }
         .background(Color.blue.opacity(0.1))
         .cornerRadius(10.0)
-
+        //.accessibilityIdentifier("ArticleCell")
     }
     
     @ViewBuilder

@@ -27,7 +27,7 @@ struct NewArticleView: View {
                     colors: [
                         .teal,.cyan,.teal,
                         .white, .white, .white,
-                        .white, .teal, .white
+                        .white, .brown, .white
                     ]
                 )
                 .ignoresSafeArea()
@@ -45,11 +45,12 @@ struct NewArticleView: View {
                                     let product = viewModel.arrOfProducts[index]
                                     NavigationLink {
                                         ArticleNewDetail(articleDetail: product)
+                                           .accessibilityIdentifier("Article_\(index)")
                                     } label: {
                                         let viewModel = ArticleCellViewModel(withArticle: product)
                                         ArticleCell(viewModel: viewModel)
-                                           
                                     }
+                                    .accessibilityIdentifier("Article_Cell_\(index)")
                                 }
                             }
                             .padding(.init(top: 0, leading: 16, bottom: 0, trailing: 16))
