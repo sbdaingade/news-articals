@@ -50,6 +50,7 @@ struct NewArticleView: View {
                                         ArticleCell(viewModel: viewModel)
                                            
                                     }
+                                    .accessibilityIdentifier("Article_Cell_\(index)")
                                 }
                             }
                             .padding(.init(top: 0, leading: 16, bottom: 0, trailing: 16))
