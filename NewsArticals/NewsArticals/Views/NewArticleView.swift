@@ -25,8 +25,8 @@ struct NewArticleView: View {
                         [0.0, 1.0], [0.2, 1.0], [1.0, 1.0]
                     ],
                     colors: [
-                        .teal,.cyan,.teal,
-                        .white, .white, .white,
+                        .teal,.cyan,.blue,
+                        .blue, .white, .teal,
                         .white, .teal, .white
                     ]
                 )
