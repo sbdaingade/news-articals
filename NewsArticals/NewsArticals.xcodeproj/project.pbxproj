@@ -120,6 +120,7 @@
 				4A46849D2CDBD67D00787B39 /* Sources */,
 				4A46849E2CDBD67D00787B39 /* Frameworks */,
 				4A46849F2CDBD67D00787B39 /* Resources */,
+				4A293BCA2F8BABC50018284C /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -253,6 +254,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		4A293BCA2F8BABC50018284C /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "file=\"unused.rb\"\nif [ -f \"$file\" ]\nthen\necho \"$file found.\"\nruby unused.rb xcode\nelse\necho \"unused.rb doesn't exist\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		4A46849D2CDBD67D00787B39 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -303,6 +324,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NewsArticals/Preview Content\"";
 				DEVELOPMENT_TEAM = K6X56F623L;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NewsArticals/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = news;
@@ -343,6 +365,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"NewsArticals/Preview Content\"";
 				DEVELOPMENT_TEAM = K6X56F623L;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = NewsArticals/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = news;

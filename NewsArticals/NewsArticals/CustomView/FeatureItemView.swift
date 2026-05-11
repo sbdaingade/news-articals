@@ -33,8 +33,7 @@ struct FeatureItemView: View {
             }
             VStack(alignment: .leading, spacing: 0) {
                 Text(article.title ?? "")
-                    .foregroundColor(.blue)
-                    .font(.custom("Poppins-Light", size: 14))
+                    .foregroundColor(.white)
                     .bold()
                     .lineLimit(1)
                 if let desc = article.description {
