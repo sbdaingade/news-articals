@@ -25,9 +25,9 @@ struct ArticleNewDetail: View {
                     [0.0, 1.0], [0.2, 1.0], [1.0, 1.0]
                 ],
                 colors: [
-                    .teal,.cyan,.teal,
-                    .white, .white, .white,
-                    .white, .teal, .white
+                    .teal,.blue,.teal,
+                    .blue, .blue, .cyan,
+                    .cyan, .teal, .blue
                 ]
             )
             .ignoresSafeArea()

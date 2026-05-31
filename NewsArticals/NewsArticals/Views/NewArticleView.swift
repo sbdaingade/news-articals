@@ -26,8 +26,8 @@ struct NewArticleView: View {
                     ],
                     colors: [
                         .teal,.cyan,.blue,
-                        .blue, .white, .teal,
-                        .white, .teal, .white
+                        .blue, .blue, .teal,
+                        .cyan, .blue, .white
                     ]
                 )
                 .ignoresSafeArea()
